@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Algorithms
 
 struct ContentView: View {
     @State var viewModel: UnitsSession
@@ -43,7 +42,7 @@ struct ContentView: View {
                         .frame(width: 150.0, height: 70.0)
                         .foregroundColor(Color(UIColor.systemBackground))
                     Picker("Select Measurement", selection: $viewModel.selection) {
-                        ForEach(Array(viewModel.options.uniqued()), id: \.self) {
+                        ForEach(viewModel.options, id: \.self) {
                             Text($0)
                         }
                         .pickerStyle(.menu)
@@ -74,7 +73,7 @@ struct ContentView: View {
             // Specific units of the measurement selector and input
             HStack {
                 Picker("Select Unit", selection: $viewModel.selectionUnit) { // unit selector
-                    ForEach(Array(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].uniqued()), id:\.self) {
+                    ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
                         Text($0)
                     }
                 }
@@ -92,7 +91,7 @@ struct ContentView: View {
 struct TextView: View {
     var content: [String]
     var body: some View {
-        ForEach(Array(content[0..<content.count].uniqued()), id: \.self) { aContent in
+        ForEach(content[0..<content.count], id: \.self) { aContent in
             Text(aContent)
                 .frame(height: 18)
                 .font(.system(size: 25))
@@ -104,7 +103,7 @@ struct TextView: View {
 struct ValueView: View {
     var output: [String]
     var body: some View {
-        ForEach(Array(output.uniqued()), id: \.self) { out in
+        ForEach(output, id: \.self) { out in
             Text(out)
                 .frame(height: 18)
                 .font(.system(size: 23))

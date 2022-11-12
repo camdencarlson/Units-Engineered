@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var viewModel: UnitsSession
-       
+    
     var body: some View {
         
         
@@ -20,7 +20,7 @@ struct ContentView: View {
                     .frame(width: 300.0, height: 300.0)
                     .foregroundColor(Color(UIColor.systemBackground))
                 HStack { // values and units
-                    VStack { // Names of units
+                    VStack(alignment: .leading) { // Names of units
                         TextView(content: viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0])
                     }
                     VStack { // Values text boxes
@@ -33,18 +33,39 @@ struct ContentView: View {
             Spacer()
                 
             // Measurement selector
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 150.0, height: 70.0)
-                    .foregroundColor(Color(UIColor.systemBackground))
-                Picker("Select Measurement", selection: $viewModel.selection) {
-                    ForEach(viewModel.options, id: \.self) {
-                        Text($0)
+            HStack {
+                Spacer()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(width: 150.0, height: 70.0)
+                        .foregroundColor(Color(UIColor.systemBackground))
+                    Picker("Select Measurement", selection: $viewModel.selection) {
+                        ForEach(viewModel.options, id: \.self) {
+                            Text($0)
+                        }
+                        .pickerStyle(.menu)
+                        
+                        //Text("Selected: \(selection)")
                     }
-                    .pickerStyle(.menu)
-                    //Text("Selected: \(selection)")
                 }
+                Spacer()
+                Button(action: {
+                    if (viewModel.rounder < 13) {
+                        viewModel.rounder = viewModel.rounder+1
+                    }
+                    
+                }, label: {
+                    Label("", systemImage: "plus")
+                })
+                Button(action: {
+                    if (viewModel.rounder > 2) {
+                        viewModel.rounder = viewModel.rounder-1
+                    }
+                }, label: {
+                    Label("", systemImage: "minus")
+                })
             }
+            
             // End of Measurement selector
             
             // Specific units of the measurement selector and input
@@ -70,7 +91,8 @@ struct TextView: View {
     var body: some View {
         ForEach(content[0..<content.count], id: \.self) { aContent in
             Text(aContent)
-                .frame(height: 15)
+                .frame(height: 18)
+                .font(.system(size: 25))
         }
     }
 }
@@ -80,7 +102,8 @@ struct ValueView: View {
     var body: some View {
         ForEach(output, id: \.self) { out in
             Text(out)
-                .frame(height: 15)
+                .frame(height: 18)
+                .font(.system(size: 25))
         }
     }
 }

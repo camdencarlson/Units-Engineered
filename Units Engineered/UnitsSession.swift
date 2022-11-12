@@ -34,16 +34,24 @@ struct UnitsSession {
                                       [1,60,3600,0.0005787037,0.034722222222,2.0833333333,16.387064,983.22384,58933.4303, 0.000016387064, 0.016387064,0.004329004329, 0.2597402597, 15.58441558,374.025974]]
     var selection = "Length"
     var selectionUnit = "Inch"
+    var rounder = 2
     
     var input = ""
     
     func output() -> [String] {
+        var roundNum = Double(1)
+        for _ in 1...rounder-1 {
+            roundNum = roundNum * 10
+        }
+        
+        
         var output = [String](repeating: "", count: ratios[options.firstIndex(of: selection) ?? 0].count)
         var counter = 0;
         for _ in output {
-            output[counter] = String((Double(input) ?? 0) * ratios[options.firstIndex(of: selection) ?? 0][counter] / ratios[options.firstIndex(of: selection) ?? 0][units[options.firstIndex(of: selection) ?? 0].firstIndex(of: selectionUnit) ?? 0])
+            let ratioIndex = options.firstIndex(of: selection) ?? 0
+            let ratioIndexUnit = units[options.firstIndex(of: selection) ?? 0].firstIndex(of: selectionUnit) ?? 0
+            output[counter] = String(round((Double(input) ?? 0) * ratios[ratioIndex][counter] / ratios[ratioIndex][ratioIndexUnit] * roundNum) / roundNum)
             counter = counter + 1
-            
         }
         return output
     }

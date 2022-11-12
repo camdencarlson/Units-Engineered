@@ -8,6 +8,7 @@
 import Foundation
 
 struct UnitsSession {
+    
     let options = ["Acceleration","Angle","Angular Velocity", "Area","Density","Energy","Specific Energy","Force","Heat Capacity", "Length","Mass","Mass Flow","Power","Pressure","Temperature","Thermal Conduction","Time","Velocity","Viscosity (Dynamic)","Viscosity (Kinematic)","Volume","Volumetric Flow"]
     let units: [[String]] = [["ft/s^2","m/s^2","cm/s^2","gee","mile/hr/s"], ["deg","rad","grad" ,"rev","arcmin","arcsec"], ["RPM","deg/s","rad/s","deg/min","rad/min"],["inch^2","ft^2","cm^2","m^2","mile^2","acre"], ["lbm/inch^3","lbm/ft^3","slug/ft^3","g/ml","specific gravity","kg/m^3","lbm/galUS","ounce/galUS"], ["BTU","ft*lbf","W*hr","kW/hr","cal","kcal","J","kJ"], ["BTU/lbm","cal/g","kcal/g","kcal/kg","J/g","kJ/kg","kW*hr/kg"], ["lbf","N","kN"], ["BTU/lbm/dF","cal/g/dC","kcal/g/dC","J/kg/dK","kJ/kg/dK"], ["inch", "thou","ft","yd","mm","cm","m","km","mile","nautical mile","angstrom","astronomical unit", "light year"], ["lbm", "slug","g","kg","metric ton","short ton","long ton","gal H2O"], ["lbm/s","kg/s","g/s","lbm/min","kg/min","g/min","lbm/hr","kg/hr","g/hr"], ["HP","BTU/s","BTU/hr","cal/s","W`","kW","MW","ft*lbf/s"], ["psai","atm","MPa","kPa","Pa","psf","bar","torr","inHg","mmHg","lbf/inch^2","lbf/ft^2","N/cm^2","N/m^2"], ["degR","degF"], ["BTU/hr/ft/dF", "BTU/s/inch/dF"], ["s","ms","microsec","nanosec","min","hr","day","year"], ["ft/s","inch/s","cm/s","m/s","km/hr","mph"], ["poise","cpoise","lbm/s/inch","lbm/hr/inch","lbm/s/ft","lbm/hr/ft","kg/s/m","kg/hr/m","kg/s/cm","kg/hr/cm"], ["ft^2/s","ft^2/hr","stokes","centistokes","m^2/s"], ["inch^3","ft^3","cm^3","liter","m^3","yd^3","barOil","cup","pint","quart","galUS","galUK"], ["inch^3/s","inch^3/min","inch^3/hr","ft^3/s","ft^3/min","ft^3/hr","ml/s","ml/min","ml/hr","m^3/s","l/s","galUS/s","galUS/min","galUS/hr","galUS/day"]]
     let ratios: [[Double]] = [[1,0.3048,30.48,0.03108095,0.6818181818],
@@ -33,7 +34,7 @@ struct UnitsSession {
                                       [1,0.0005787037037, 16.387064, 0.016387064,0.000016387064, 0.00002143347051, 0.0001030715316, 0.06926406926, 0.03463203463, 0.01731601732, 0.004329004329,0.00360465015],
                                       [1,60,3600,0.0005787037,0.034722222222,2.0833333333,16.387064,983.22384,58933.4303, 0.000016387064, 0.016387064,0.004329004329, 0.2597402597, 15.58441558,374.025974]]
     var selection = "Length"
-    var selectionUnit = "Inch"
+    var selectionUnit = "inch"
     var rounder = 2
     
     var input = ""
@@ -55,15 +56,6 @@ struct UnitsSession {
         }
         return output
     }
-//    init() {
-//        vals = [Double](count: 4, repeatedValue: 0.0)
-//        var valCount = 0
-//        for _ in self.vals[options.firstIndex(of: selection) ?? 0] {
-//            vals[options.firstIndex(of: selection) ?? 0][valCount] = (Double(input) ?? 0) * ratios[options.firstIndex(of: selection) ?? 0][valCount]
-//            valCount = valCount+1
-//        }
-//        valCount = 0
-//    }
 
 }
 

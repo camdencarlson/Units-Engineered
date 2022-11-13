@@ -24,7 +24,7 @@ struct ContentView: View {
                 
                     
                 HStack { // values and units
-                    VStack(alignment: .leading) { // Names of units
+                    VStack(alignment: .trailing) { // Names of units
                         TextView(content: viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0])
                             
                     }
@@ -40,11 +40,6 @@ struct ContentView: View {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
             // End of Answer platform/area
-            
-            
-            
-            
-            
             
             
                 
@@ -111,6 +106,7 @@ struct TextView: View {
                 .colorInvert()
                 .frame(height: 18)
                 .font(.system(size: 25))
+                
             
         }
     }

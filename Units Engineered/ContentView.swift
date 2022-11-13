@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var viewModel: UnitsSession
-    
+    @FocusState private var keyboardFocused: Bool
     var body: some View {
         
         
@@ -88,8 +88,10 @@ struct ContentView: View {
                 }
                 //Text("Inches: ")
                 TextField("User Input", text: $viewModel.input) // user input
+                    .focused($keyboardFocused)
                     .padding()
                     .keyboardType(.decimalPad)
+                    .onAppear(perform: {keyboardFocused = true})
             }
             // End of Unit selector and input
         } // End of entire VStack

@@ -13,7 +13,7 @@ struct Units_EngineeredApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: unitsSession)
+            ContentView()
         }
     }
 }

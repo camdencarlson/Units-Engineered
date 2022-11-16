@@ -91,11 +91,13 @@ struct CalcView: View {
                     }
                 }
                 //Text("Inches: ")
-                TextField("User Input", text: $viewModel.input) // user input
-                    .focused($keyboardFocused)
-                    .padding()
-                    .keyboardType(.decimalPad)
+                LazyVStack {
+                    TextField("User Input", text: $viewModel.input) // user input
+                        .focused($keyboardFocused)
+                        .padding()
+                        .keyboardType(.decimalPad)
                     .onAppear(perform: {keyboardFocused = true})
+                }
             }
             // End of Unit selector and input
         } // End of entire VStack

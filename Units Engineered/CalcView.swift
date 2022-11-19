@@ -32,11 +32,13 @@ struct CalcView: View {
     
     var body: some View {
         VStack {
+            
             Button(action: {
                 customView = !customView
             }, label: {
                 Text("Custom Units")
             })
+            .padding(.all, 10.0)
             Spacer()
             // Answer platform/area
             ZStack {
@@ -64,7 +66,7 @@ struct CalcView: View {
             }
             // End of Answer platform/area
             
-            
+        
             
             // Measurement selector
             HStack {
@@ -88,6 +90,11 @@ struct CalcView: View {
                             .fontWeight(.heavy)
                             .font(.title2)
                     }
+                    .padding(.all, 10.0)
+                    .frame(height: 20.0, alignment: .center)
+                    
+                    
+                    
                     
                     
                     
@@ -110,10 +117,11 @@ struct CalcView: View {
                     Label("", systemImage: "minus")
                 })
             }
+            .ignoresSafeArea(.keyboard)
             
             // End of Measurement selector
             
-            // Specific units of the measurement selector and input
+            // Specific units and input
             HStack {
                 Menu {
                     Picker("Select Unit", selection: selectionUnitBind) { // unit selector
@@ -127,19 +135,23 @@ struct CalcView: View {
                         .font(.title2)
                         .fontWeight(.heavy)
                 }
+                .padding(.all, 10.0)
+                .frame(width: 100, height: 20.0)
                 
                 //Text("Inches: ")
-                LazyVStack {
-                    TextField("User Input", text: $viewModel.input) // user input
+                VStack {
+                    TextField("User Input", text: $viewModel.input)
+                        .frame(height: 20.0) // user input
                         .focused($keyboardFocused)
                         .padding()
                         .keyboardType(.decimalPad)
                     .onAppear(perform: {keyboardFocused = true})
                 }
+                
             }
             // End of Unit selector and input
         } // End of entire VStack
-        .padding()
+        
     } // End of body
 }
 

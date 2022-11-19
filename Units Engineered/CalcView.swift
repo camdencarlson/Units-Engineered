@@ -21,7 +21,12 @@ struct CalcView: View {
                 return viewModel.selectionUnit
             }
         } set: {
-            viewModel.selectionUnit = $0
+            if !viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].contains($0) {
+                viewModel.selectionUnit = viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0][0]
+            } else {
+                viewModel.selectionUnit = $0
+            }
+            
         }
     }
     
@@ -48,7 +53,7 @@ struct CalcView: View {
                     }
                     
                     
-                    VStack { // Values text boxes
+                    VStack(alignment: .trailing) { // Values text boxes
                         ValueView(output: viewModel.output())
                     }
                 }
@@ -68,15 +73,25 @@ struct CalcView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .frame(width: 150.0, height: 40.0)
                         .foregroundColor(Color(UIColor.systemBackground))
-                    Picker("Select Measurement", selection: $viewModel.selection) {
-                        ForEach(viewModel.options, id: \.self) {
-                            Text($0)
+                    Menu {
+                        Picker("Select Measurement", selection: $viewModel.selection) {
+                            ForEach(viewModel.options, id: \.self) {
+                                Text($0)
+                            }
+                            .pickerStyle(.menu)
+                            
+                            
+                            //Text("Selected: \(selection)")
                         }
-                        .pickerStyle(.menu)
-                        
-                        
-                        //Text("Selected: \(selection)")
+                    } label: {
+                        Text(viewModel.selection)
+                            .fontWeight(.heavy)
+                            .font(.title2)
                     }
+                    
+                    
+                    
+                    
                 }
                 Spacer()
                 Button(action: {
@@ -100,12 +115,19 @@ struct CalcView: View {
             
             // Specific units of the measurement selector and input
             HStack {
-                Picker("Select Unit", selection: selectionUnitBind) { // unit selector
-                    ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
-                        Text($0).tag($0)
+                Menu {
+                    Picker("Select Unit", selection: selectionUnitBind) { // unit selector
+                        ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
+                            Text($0).tag($0)
+                        }
+                        
                     }
-                    
+                } label: {
+                    Text(selectionUnitBind.wrappedValue)
+                        .font(.title2)
+                        .fontWeight(.heavy)
                 }
+                
                 //Text("Inches: ")
                 LazyVStack {
                     TextField("User Input", text: $viewModel.input) // user input
@@ -128,8 +150,8 @@ struct TextView: View {
             Text(aContent)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 18)
-                .font(.system(size: 25))
+                .frame(height: 15)
+                .font(.system(size: 20))
         }
     }
 }
@@ -141,8 +163,8 @@ struct ValueView: View {
             Text(out.valOfUnit)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 18)
-                .font(.system(size: 23))
+                .frame(height: 15)
+                .font(.system(size: 19))
         }
     }
 }

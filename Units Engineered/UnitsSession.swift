@@ -36,8 +36,9 @@ struct UnitsSession {
                                       [1,0.0005787037037, 16.387064, 0.016387064,0.000016387064, 0.00002143347051, 0.0001030715316, 0.06926406926, 0.03463203463, 0.01731601732, 0.004329004329,0.00360465015],//volume
                                       [1,60,3600,0.0005787037,0.034722222222,2.0833333333,16.387064,983.22384,58933.4303, 0.000016387064, 0.016387064,0.004329004329, 0.2597402597, 15.58441558,374.025974]] //volume flow
     var selection = "Length"
-    @State var selectionUnit = "inch"
-    
+    var selectionUnit: String = "inch"
+    @State var queryType: String = ""
+    @State var selectionUnitCopy = "inch"
     
     var rounder = 2
     

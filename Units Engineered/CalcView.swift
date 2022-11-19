@@ -11,8 +11,10 @@ struct CalcView: View {
     @State var viewModel: UnitsSession
     @FocusState private var keyboardFocused: Bool
     @Binding var customView: Bool
+    
     var body: some View {
         VStack {
+            Text(viewModel.selectionUnit)
             Button(action: {
                 customView = !customView
             }, label: {
@@ -60,8 +62,11 @@ struct CalcView: View {
                         }
                         .pickerStyle(.menu)
                         
+                        
                         //Text("Selected: \(selection)")
                     }
+                    
+                    
                 }
                 Spacer()
                 Button(action: {
@@ -85,7 +90,7 @@ struct CalcView: View {
             
             // Specific units of the measurement selector and input
             HStack {
-                Picker("Select Unit", selection: $viewModel.selectionUnit) { // unit selector
+                Picker("Select Unit", selection: viewModel.selectionUnitBind) { // unit selector
                     ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
                         Text($0)
                     }
@@ -121,10 +126,10 @@ struct TextView: View {
 }
 
 struct ValueView: View {
-    var output: [String]
+    var output: [UnitOutput]
     var body: some View {
         ForEach(output, id: \.self) { out in
-            Text(out)
+            Text(out.valOfUnit)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
                 .frame(height: 18)
@@ -133,3 +138,4 @@ struct ValueView: View {
         }
     }
 }
+

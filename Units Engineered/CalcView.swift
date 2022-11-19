@@ -13,7 +13,6 @@ struct CalcView: View {
     @Binding var customView: Bool
     @Binding var unitStringValue: String
     
-
     var selectionUnitBind: Binding<String> {
         Binding {
             if !viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].contains(viewModel.selectionUnit) {
@@ -25,8 +24,6 @@ struct CalcView: View {
             viewModel.selectionUnit = $0
         }
     }
-    
-    
     
     var body: some View {
         VStack {
@@ -80,8 +77,6 @@ struct CalcView: View {
                         
                         //Text("Selected: \(selection)")
                     }
-                    
-                    
                 }
                 Spacer()
                 Button(action: {
@@ -135,8 +130,6 @@ struct TextView: View {
                 .colorInvert()
                 .frame(height: 18)
                 .font(.system(size: 25))
-                
-            
         }
     }
 }
@@ -150,7 +143,6 @@ struct ValueView: View {
                 .colorInvert()
                 .frame(height: 18)
                 .font(.system(size: 23))
-                
         }
     }
 }

@@ -11,8 +11,40 @@ struct CalcView: View {
     @State var viewModel: UnitsSession
     @FocusState private var keyboardFocused: Bool
     @Binding var customView: Bool
+    @Binding var unitValueString: String
+    @State private var queryType: String = ""
+//    var selectionUnitBind: Binding<String> {
+//        Binding {
+//            if !viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].contains(viewModel.selectionUnit) {
+//                return viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0][0]
+//            } else {
+//                return viewModel.selectionUnit
+//            }
+//        } set: {
+//            viewModel.selectionUnit = $0
+//        }
+//    }
+    
+    
     
     var body: some View {
+        let selectionUnit = Binding<String>(
+            get: {
+                self.queryType
+                
+//                if !viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].contains(viewModel.selectionUnit) {
+//                    return viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0][0]
+//                } else {
+//                    return viewModel.selectionUnit
+//                }
+            },
+            set: {
+                self.queryType = $0
+                viewModel.selectionUnit = $0
+                self.unitValueString = viewModel.selectionUnit
+                
+            }
+        )
         VStack {
             Text(viewModel.selectionUnit)
             Button(action: {
@@ -90,7 +122,7 @@ struct CalcView: View {
             
             // Specific units of the measurement selector and input
             HStack {
-                Picker("Select Unit", selection: viewModel.selectionUnitBind) { // unit selector
+                Picker("Select Unit", selection: selectionUnit) { // unit selector
                     ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
                         Text($0).tag($0)
                     }

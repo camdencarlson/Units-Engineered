@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var customView: Bool = false
-    
+    @State var unitValue = "inch"
     var body: some View {
         
         let viewModel = UnitsSession()
@@ -19,7 +19,7 @@ struct ContentView: View {
             
         }
         else {
-            CalcView(viewModel: viewModel, customView: $customView)
+            CalcView(viewModel: viewModel, customView: $customView, unitValueString: $unitValue)
         }
         
     }

@@ -92,7 +92,7 @@ struct CalcView: View {
             HStack {
                 Picker("Select Unit", selection: viewModel.selectionUnitBind) { // unit selector
                     ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
-                        Text($0)
+                        Text($0).tag($0)
                     }
                 }
                 //Text("Inches: ")

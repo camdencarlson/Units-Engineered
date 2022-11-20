@@ -38,7 +38,7 @@ struct CalcView: View {
             }, label: {
                 Text("Custom Units")
             })
-            .padding(.all, 10.0)
+            .padding(.all, 2)
             Spacer()
             // Answer platform/area
             ZStack {
@@ -64,91 +64,90 @@ struct CalcView: View {
             .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
+            .padding(.all, 2)
             // End of Answer platform/area
-            
-        
-            
+
             // Measurement selector
             HStack {
                 Spacer()
                 ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .frame(width: 150.0, height: 40.0)
-                        .foregroundColor(Color(UIColor.systemBackground))
-                    Menu {
-                        Picker("Select Measurement", selection: $viewModel.selection) {
-                            ForEach(viewModel.options, id: \.self) {
-                                Text($0)
+                    HStack(alignment: .center) {
+                        Menu {
+                            Picker("Select Measurement", selection: $viewModel.selection) {
+                                ForEach(viewModel.options, id: \.self) {
+                                    Text($0)
+                                }
+                                .pickerStyle(.menu)
                             }
-                            .pickerStyle(.menu)
                             
-                            
-                            //Text("Selected: \(selection)")
+                        } label: {
+                            Text(viewModel.selection)
                         }
-                    } label: {
-                        Text(viewModel.selection)
-                            .fontWeight(.heavy)
-                            .font(.title2)
+                        .fixedSize(horizontal: false, vertical: true)
                     }
-                    .padding(.all, 10.0)
-                    .frame(height: 20.0, alignment: .center)
                     
-                    
-                    
-                    
-                    
-                    
+                    .font(.title2)
                     
                 }
+               
                 Spacer()
-                Button(action: {
-                    if (viewModel.rounder < 13) {
-                        viewModel.rounder = viewModel.rounder+1
-                    }
-                    
-                }, label: {
-                    Label("", systemImage: "plus")
-                })
-                Button(action: {
-                    if (viewModel.rounder > 2) {
-                        viewModel.rounder = viewModel.rounder-1
-                    }
-                }, label: {
-                    Label("", systemImage: "minus")
-                })
             }
-            .ignoresSafeArea(.keyboard)
+            .padding(.all, 2)
             
             // End of Measurement selector
             
             // Specific units and input
-            HStack {
-                Menu {
+            HStack(alignment: .center) {
+                VStack {
+                    
                     Picker("Select Unit", selection: selectionUnitBind) { // unit selector
                         ForEach(viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0], id:\.self) {
                             Text($0).tag($0)
                         }
-                        
                     }
-                } label: {
-                    Text(selectionUnitBind.wrappedValue)
-                        .font(.title2)
-                        .fontWeight(.heavy)
+                
                 }
-                .padding(.all, 10.0)
-                .frame(width: 100, height: 20.0)
+                .frame(width: 85, height: 30)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.all, 10)
                 
                 //Text("Inches: ")
                 VStack {
                     TextField("User Input", text: $viewModel.input)
-                        .frame(height: 20.0) // user input
+                        .frame(height: 40.0) // user input
                         .focused($keyboardFocused)
-                        .padding()
+                        
                         .keyboardType(.decimalPad)
                     .onAppear(perform: {keyboardFocused = true})
                 }
+                .padding(.all, 10)
                 
+                .frame(height: 30)
+                
+                HStack {
+                    Button(action: {
+                        if (viewModel.rounder < 13) {
+                            viewModel.rounder = viewModel.rounder+1
+                        }
+                        
+                    }, label: {
+                        Label("", systemImage: "plus")
+                            
+                    })
+                    .frame(height: 30)
+                    Button(action: {
+                        if (viewModel.rounder > 2) {
+                            viewModel.rounder = viewModel.rounder-1
+                        }
+                    }, label: {
+                        Label("", systemImage: "minus")
+                            
+                    })
+                    .frame(height: 30)
+                }
+                .font(.title2)
             }
+            .padding(.all, 10)
             // End of Unit selector and input
         } // End of entire VStack
         

@@ -17,7 +17,7 @@ struct CustomView: View {
             }, label: {
                 Text("Back")
             })
-            Text("Custom Units")
+            Text("Custom unit functionality coming soon.")
         }
         
     }

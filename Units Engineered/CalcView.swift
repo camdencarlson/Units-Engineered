@@ -72,17 +72,17 @@ struct CalcView: View {
                 Spacer()
                 ZStack {
                     HStack(alignment: .center) {
-                        Menu {
-                            Picker("Select Measurement", selection: $viewModel.selection) {
-                                ForEach(viewModel.options, id: \.self) {
-                                    Text($0)
-                                }
-                                .pickerStyle(.menu)
+//                        Menu {
+                        Picker("Select Measurement", selection: $viewModel.selection) {
+                            ForEach(viewModel.options, id: \.self) {
+                                Text($0)
                             }
-                            
-                        } label: {
-                            Text(viewModel.selection)
+                            .pickerStyle(.menu)
                         }
+                            
+//                        } label: {
+//                            Text(viewModel.selection)
+//                        }
                         .fixedSize(horizontal: false, vertical: true)
                     }
                     
@@ -161,8 +161,8 @@ struct TextView: View {
             Text(aContent)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 15)
-                .font(.system(size: 20))
+                .frame(height: 18)
+                .font(.system(size: 23))
         }
     }
 }
@@ -174,8 +174,8 @@ struct ValueView: View {
             Text(out.valOfUnit)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 15)
-                .font(.system(size: 19))
+                .frame(height: 18)
+                .font(.system(size: 21))
         }
     }
 }

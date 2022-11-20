@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 struct CalcView: View {
     @State var viewModel: UnitsSession
     @FocusState private var keyboardFocused: Bool
     @Binding var customView: Bool
     @Binding var unitStringValue: String
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var selectionUnitBind: Binding<String> {
         Binding {
@@ -32,7 +34,27 @@ struct CalcView: View {
     
     var body: some View {
         VStack {
-            
+            if userViewModel.isSubscriptionActive != true {
+                if userViewModel.package != nil {
+                    Button(action: {
+                        Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
+                          if customerInfo?.entitlements["allaccess"]?.isActive == true {
+                              userViewModel.isSubscriptionActive = true
+                          }
+                        }
+                    }, label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(height: 55)
+                                .foregroundColor(.blue)
+                                .cornerRadius(15)
+                            Text("Go Pro")
+                        }
+                        
+                    })
+                }
+                
+            }
             Button(action: {
                 customView = !customView
             }, label: {

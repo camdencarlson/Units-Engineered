@@ -7,17 +7,11 @@
 
 import Foundation
 import SwiftUI
-import Purchases
+import RevenueCat
 
 struct UnitsSession {
-    @ObservableObject var userPurchases = [Bool]()
-    init() {
-        Purchases.shared.purchaserInfo { (customerInfo, error) in
-            if customerInfo?.entitlements.all["allaccess"]?.isActive == true {
-                userPurchases[0] = true;
-            }
-        }
-    }
+    @State var allAccess = false;
+    
     let options = ["Acceleration","Angle","Angular Velocity", "Area","Density","Energy","Specific Energy","Force","Heat Capacity", "Heat Transfer Coef","Length","Mass","Mass Flow","Power","Pressure","Temperature","Thermal Conduction","Time","Velocity","Viscosity (Dynamic)","Viscosity (Kinematic)","Volume","Volumetric Flow"]
     let units: [[String]] = [["ft/s^2","m/s^2","cm/s^2","gee","mile/hr/s"], ["deg","rad","grad" ,"rev","arcmin","arcsec"], ["RPM","deg/s","rad/s","deg/min","rad/min"],["inch^2","ft^2","cm^2","m^2","mile^2","acre"], ["lbm/inch^3","lbm/ft^3","slug/ft^3","g/ml","specific gravity","kg/m^3","lbm/galUS","ounce/galUS"], ["BTU","ft*lbf","W*hr","kW/hr","cal","kcal","J","kJ"], ["BTU/lbm","cal/g","kcal/g","kcal/kg","J/g","kJ/kg","kW*hr/kg"], ["lbf","N","kN"], ["BTU/lbm/dF","cal/g/dC","kcal/g/dC","J/kg/dK","kJ/kg/dK"], ["BTU/inch^2/s/delF", "BTU/ft^2/hr/delF", "cal/cm^2/s/delC", "kcal/m^2/hr/delC", "W/m^2/delC"], ["inch", "thou","ft","yd","mm","cm","m","km","mile","nautical mile","angstrom","astronomical unit", "light year"], ["lbm", "slug","g","kg","metric ton","short ton","long ton","gal H2O"], ["lbm/s","kg/s","g/s","lbm/min","kg/min","g/min","lbm/hr","kg/hr","g/hr","galH2O/s","galH20/min","galH2O/hr"], ["HP","BTU/s","BTU/hr","cal/s","W","kW","MW","ft*lbf/s"], ["psai","atm","MPa","kPa","Pa","psf","bar","torr","inHg","mmHg","lbf/inch^2","lbf/ft^2","N/cm^2","N/m^2"], ["degR","degF","degK","degC"], ["BTU/hr/ft/dF", "BTU/s/inch/dF","cal/s/cm/delC","cal/s/m/delC","W/cm/delC"], ["s","ms","microsec","nanosec","min","hr","day","year"], ["ft/s","inch/s","cm/s","m/s","km/hr","mph"], ["poise","cpoise","lbm/s/inch","lbm/hr/inch","lbm/s/ft","lbm/hr/ft","kg/s/m","kg/hr/m","kg/s/cm","kg/hr/cm"], ["ft^2/s","ft^2/hr","stokes","centistokes","m^2/s"], ["inch^3","ft^3","cm^3","liter","m^3","yd^3","barOil","cup","pint","quart","galUS","galUK"], ["inch^3/s","inch^3/min","inch^3/hr","ft^3/s","ft^3/min","ft^3/hr","ml/s","ml/min","ml/hr","m^3/s","l/s","galUS/s","galUS/min","galUS/hr","galUS/day"]]
     let ratios: [[Double]] = [[1,0.3048,30.48,0.03108095,0.6818181818], // acceleration
@@ -85,8 +79,8 @@ struct UnitsSession {
                 
             }
             else if selection != "Length" {
-                if userPurchases[0] != true {
-                    makePurchase()
+                if allAccess != true {
+                    allAccess = makePurchase()
                 }
                 else {
                     let ratioIndex = options.firstIndex(of: selection) ?? 0
@@ -104,8 +98,15 @@ struct UnitsSession {
         }
         return output
     }
-    func makePurchase() {
+    func makePurchase() -> Bool {
         PurchaseService.purchase(productID: "unitseng_999_1yr")
+        var purchaseSuccess = false
+        Purchases.shared.getCustomerInfo { (customerInfo, error) in
+            if customerInfo?.entitlements.all["allaccess"]?.isActive == true {
+                purchaseSuccess = true;
+            }
+        }
+        return purchaseSuccess
     }
 
 }

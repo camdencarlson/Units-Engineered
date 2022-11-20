@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-import Purchases
+import RevenueCat
 
 @main
 struct Units_EngineeredApp: App {
 //    let unitsSession = UnitsSession() // reference type doesn't change
+    @StateObject var userViewModel = UserViewModel()
     init() {
         setupRevenueCat()
     }
@@ -19,11 +20,12 @@ struct Units_EngineeredApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(userViewModel)
         }
     }
     
     func setupRevenueCat() {
-        Purchases.debugLogsEnabled = true
+        Purchases.logLevel  = .debug
         Purchases.configure(withAPIKey: "appl_GhaiJlFXnqFMHJZFKwszJWDbRlW")
         
     }

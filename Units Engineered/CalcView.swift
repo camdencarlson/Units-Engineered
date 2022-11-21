@@ -56,7 +56,7 @@ struct CalcView: View {
                                 
                                 
                             }
-                            .padding([.top, .trailing])
+                            .padding([.top, .trailing, .leading])
                             
                             
                         })
@@ -80,8 +80,6 @@ struct CalcView: View {
                 })
             }
             
-            
-            .padding(.all, 2)
             Spacer()
             // Answer platform/area
             ZStack {

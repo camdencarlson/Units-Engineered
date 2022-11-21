@@ -35,7 +35,7 @@ struct CalcView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .center) {
                 if userViewModel.isSubscriptionActive != true {
                     if userViewModel.package != nil {
                         Button(action: {
@@ -79,6 +79,7 @@ struct CalcView: View {
                     .padding([.top, .trailing, .leading])
                 })
             }
+            
             
             Spacer()
             // Answer platform/area

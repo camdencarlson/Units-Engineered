@@ -15,6 +15,7 @@ struct CalcView: View {
     @Binding var unitStringValue: String
     @EnvironmentObject var userViewModel: UserViewModel
     
+    
     var selectionUnitBind: Binding<String> {
         Binding {
             if !viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0].contains(viewModel.selectionUnit) {
@@ -34,32 +35,52 @@ struct CalcView: View {
     
     var body: some View {
         VStack {
-            if userViewModel.isSubscriptionActive != true {
-                if userViewModel.package != nil {
-                    Button(action: {
-                        Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
-                          if customerInfo?.entitlements["allaccess"]?.isActive == true {
-                              userViewModel.isSubscriptionActive = true
-                          }
-                        }
-                    }, label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(height: 55)
-                                .foregroundColor(.blue)
-                                .cornerRadius(15)
-                            Text("Go Pro")
-                        }
-                        
-                    })
+            HStack {
+                if userViewModel.isSubscriptionActive != true {
+                    if userViewModel.package != nil {
+                        Button(action: {
+                            Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
+                              if customerInfo?.entitlements["allaccess"]?.isActive == true {
+                                  userViewModel.isSubscriptionActive = true
+                              }
+                            }
+                            viewModel.allAccess = userViewModel.isSubscriptionActive
+                        }, label: {
+                            ZStack {
+                                Text("Go Pro")
+                                    .foregroundColor(Color(UIColor.systemBackground))
+                                    .background(Rectangle()
+                                        .frame(width: 100, height: 30)
+                                        .foregroundColor(.blue)
+                                        .cornerRadius(15))
+                                
+                                
+                            }
+                            .padding([.top, .trailing])
+                            
+                            
+                        })
+                    }
+                    
                 }
-                
+                Button(action: {
+                    customView = !customView
+                }, label: {
+                    ZStack {
+                        Text("Custom Units")
+                            .foregroundColor(Color(UIColor.systemBackground))
+                            .background(Rectangle()
+                                .frame(width: 120, height: 30)
+                                .foregroundColor(.blue)
+                                .cornerRadius(15))
+                        
+                        
+                    }
+                    .padding([.top, .trailing, .leading])
+                })
             }
-            Button(action: {
-                customView = !customView
-            }, label: {
-                Text("Custom Units")
-            })
+            
+            
             .padding(.all, 2)
             Spacer()
             // Answer platform/area
@@ -96,10 +117,16 @@ struct CalcView: View {
                     HStack(alignment: .center) {
 //                        Menu {
                         Picker("Select Measurement", selection: $viewModel.selection) {
-                            ForEach(viewModel.options, id: \.self) {
-                                Text($0)
+                            if userViewModel.isSubscriptionActive {
+                                ForEach(viewModel.options, id: \.self) {
+                                    Text($0)
+                                }
+                                .pickerStyle(.menu)
+                            } else {
+                                Text("Temperature")
+                                Text("Length")
                             }
-                            .pickerStyle(.menu)
+                            
                         }
                             
 //                        } label: {
@@ -183,8 +210,8 @@ struct TextView: View {
             Text(aContent)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 18)
-                .font(.system(size: 23))
+                .frame(height: 15)
+                .font(.system(size: 21))
         }
     }
 }
@@ -196,8 +223,8 @@ struct ValueView: View {
             Text(out.valOfUnit)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 18)
-                .font(.system(size: 21))
+                .frame(height: 15)
+                .font(.system(size: 19))
         }
     }
 }

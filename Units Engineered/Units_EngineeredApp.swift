@@ -26,6 +26,7 @@ struct Units_EngineeredApp: App {
     
     func setupRevenueCat() {
         Purchases.logLevel  = .debug
+        
         Purchases.configure(withAPIKey: "appl_GhaiJlFXnqFMHJZFKwszJWDbRlW")
         
     }

@@ -78,16 +78,6 @@ struct UnitsSession {
                 }
                 
             }
-            else if selection != "Length" {
-                if allAccess != true {
-                    allAccess = makePurchase()
-                }
-                else {
-                    let ratioIndex = options.firstIndex(of: selection) ?? 0
-                    let ratioIndexUnit = units[options.firstIndex(of: selection) ?? 0].firstIndex(of: selectionUnit) ?? 0
-                    output[counter] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * ratios[ratioIndex][counter] / ratios[ratioIndex][ratioIndexUnit] * roundNum) / roundNum), num: counter)
-                }
-            }
             else {
                 let ratioIndex = options.firstIndex(of: selection) ?? 0
                 let ratioIndexUnit = units[options.firstIndex(of: selection) ?? 0].firstIndex(of: selectionUnit) ?? 0
@@ -98,17 +88,6 @@ struct UnitsSession {
         }
         return output
     }
-    func makePurchase() -> Bool {
-        PurchaseService.purchase(productID: "unitseng_999_1yr")
-        var purchaseSuccess = false
-        Purchases.shared.getCustomerInfo { (customerInfo, error) in
-            if customerInfo?.entitlements.all["allaccess"]?.isActive == true {
-                purchaseSuccess = true;
-            }
-        }
-        return purchaseSuccess
-    }
-
 }
 
 struct UnitOutput : Hashable {

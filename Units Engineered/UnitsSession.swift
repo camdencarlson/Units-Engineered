@@ -39,7 +39,7 @@ struct UnitsSession {
                                       [1,60,3600,0.0005787037,0.034722222222,2.0833333333,16.387064,983.22384,58933.4303, 0.000016387064, 0.016387064,0.004329004329, 0.2597402597, 15.58441558,374.025974]] //volume flow
     var selection = "Length"
     var selectionUnit: String = "inch"
-    var rounder = 2
+    var rounder = 3
     var input = ""
     
     func output() -> [UnitOutput] {

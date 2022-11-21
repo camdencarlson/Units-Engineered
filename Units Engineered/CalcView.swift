@@ -122,8 +122,8 @@ struct CalcView: View {
                                 }
                                 .pickerStyle(.menu)
                             } else {
-                                Text("Temperature")
-                                Text("Length")
+                                Text("Temperature").tag("Temperature")
+                                Text("Length").tag("Length")
                             }
                             
                         }

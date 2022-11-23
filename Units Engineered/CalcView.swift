@@ -211,6 +211,7 @@ struct TextView: View {
                 .colorInvert()
                 .frame(height: 15)
                 .font(.system(size: 21))
+                .textSelection(.enabled)
         }
     }
 }
@@ -224,6 +225,7 @@ struct ValueView: View {
                 .colorInvert()
                 .frame(height: 15)
                 .font(.system(size: 19))
+                .textSelection(.enabled)
         }
     }
 }

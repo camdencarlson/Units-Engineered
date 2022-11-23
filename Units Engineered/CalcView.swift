@@ -83,30 +83,32 @@ struct CalcView: View {
             
             Spacer()
             // Answer platform/area
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 300.0, height: 300.0)
-                    .foregroundColor(Color(UIColor.systemBackground))
-                    .opacity(0)
-                
-                
-                HStack { // values and units
-                    VStack(alignment: .trailing) { // Names of units
-                        TextView(content: viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0])
+            ScrollView {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(width: 300.0, height: 300.0)
+                        .foregroundColor(Color(UIColor.systemBackground))
+                        .opacity(0)
+                    
+                    
+                    HStack { // values and units
+                        VStack(alignment: .trailing) { // Names of units
+                            TextView(content: viewModel.units[viewModel.options.firstIndex(of: viewModel.selection) ?? 0])
+                            
+                        }
                         
-                    }
-                    
-                    
-                    VStack(alignment: .trailing) { // Values text boxes
-                        ValueView(output: viewModel.output())
+                        
+                        VStack(alignment: .trailing) { // Values text boxes
+                            ValueView(output: viewModel.output())
+                        }
                     }
                 }
-            }
-            .padding()
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
+                .padding()
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             .padding(.all, 2)
+            }
             // End of Answer platform/area
 
             // Measurement selector

@@ -60,15 +60,15 @@ struct UnitsSession {
                     output[2] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) + Double(459.67)) / Double(1.8) * roundNum) / roundNum), num: 3);
                     output[3] = UnitOutput(valOfUnit: String(round((((Double(input) ?? 0) + Double(459.67)) / Double(1.8) - Double(273.15)) * roundNum) / roundNum), num: 4)
                 case "degC":
-                    output[0] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) + Double(273.15)) / Double(1.8) * roundNum) / roundNum), num: 0)
-                    output[1] = UnitOutput(valOfUnit: String(round((((Double(input) ?? 0) + Double(273.15)) / Double(1.8) - Double(459.67)) * roundNum ) / roundNum), num: 1)
-                    output[2] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) + Double(273.15)) * roundNum) / roundNum), num: 3)
-                    output[3] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * roundNum) / roundNum), num: 4)
+                    output[0] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) * Double(1.8) + Double(491.67)) * roundNum) / roundNum), num: 0)
+                    output[1] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) * Double(1.8) + Double(32)) * roundNum ) / roundNum), num: 1)
+                    output[2] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) + Double(273.15)) * roundNum) / roundNum), num: 2)
+                    output[3] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * roundNum) / roundNum), num: 3)
                 case "degK":
                     output[0] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * Double(1.8) * roundNum) / roundNum), num: 0)
                     output[1] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) * Double(1.8) - Double(459.67)) * roundNum) / roundNum), num: 1)
-                    output[2] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) - Double(273.15)) * roundNum) / roundNum), num: 2)
-                    output[3] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * roundNum) / roundNum), num: 3)
+                    output[3] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) - Double(273.15)) * roundNum) / roundNum), num: 2)
+                    output[2] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * roundNum) / roundNum), num: 3)
                 default:
                     output[0] = UnitOutput(valOfUnit: String(round((Double(input) ?? 0) * roundNum) / roundNum), num: 0)
                     output[1] = UnitOutput(valOfUnit: String(round(((Double(input) ?? 0) - Double(459.67)) * roundNum) / roundNum), num: 1)

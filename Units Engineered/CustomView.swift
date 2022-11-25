@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomView: View {
     @State var viewModel: UnitsSession
     @Binding var customView: Bool
+    
     var body: some View {
         VStack {
             Button(action: {

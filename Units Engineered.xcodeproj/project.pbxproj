@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		972D093D292FFAAA00FE5268 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972D093C292FFAAA00FE5268 /* PurchaseView.swift */; };
 		978267DB2929FE7C003E7959 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 978267DA2929FE7C003E7959 /* RevenueCat */; };
 		978267DD292A0159003E7959 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978267DC292A0159003E7959 /* UserViewModel.swift */; };
-		978267DF292A08E1003E7959 /* Units EngineeredUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = B6E8F826291357DE007313AF /* Units EngineeredUITests.xctest */; };
 		97CE32CA2929B8C500BDAF95 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97CE32C92929B8C500BDAF95 /* StoreKit.framework */; };
 		97CE32CC2929BADE00BDAF95 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CE32CB2929BADE00BDAF95 /* PurchaseService.swift */; };
 		B69EF93B292367BD00045173 /* CalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69EF93A292367BD00045173 /* CalcView.swift */; };
@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		972D093C292FFAAA00FE5268 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		978267DC292A0159003E7959 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		97CE32C92929B8C500BDAF95 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		97CE32CB2929BADE00BDAF95 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				978267DC292A0159003E7959 /* UserViewModel.swift */,
 				B69EF93C29236ED600045173 /* CustomView.swift */,
 				B69EF93A292367BD00045173 /* CalcView.swift */,
+				972D093C292FFAAA00FE5268 /* PurchaseView.swift */,
 				97CE32CB2929BADE00BDAF95 /* PurchaseService.swift */,
 				B6E8F813291357DE007313AF /* Assets.xcassets */,
 				B6E8F815291357DE007313AF /* Preview Content */,
@@ -249,7 +251,7 @@
 			);
 			mainGroup = B6E8F803291357DC007313AF;
 			packageReferences = (
-				978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios.git" */,
+				978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = B6E8F80D291357DC007313AF /* Products */;
 			projectDirPath = "";
@@ -283,7 +285,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				978267DF292A08E1003E7959 /* Units EngineeredUITests.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +298,7 @@
 				B69EF93D29236ED600045173 /* CustomView.swift in Sources */,
 				B6E8F812291357DC007313AF /* ContentView.swift in Sources */,
 				97CE32CC2929BADE00BDAF95 /* PurchaseService.swift in Sources */,
+				972D093D292FFAAA00FE5268 /* PurchaseView.swift in Sources */,
 				B6EA0100291EE15900A0BAA3 /* UnitsSession.swift in Sources */,
 				B6E8F810291357DC007313AF /* Units_EngineeredApp.swift in Sources */,
 				978267DD292A0159003E7959 /* UserViewModel.swift in Sources */,
@@ -474,7 +476,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.camdencarlson.Units-Engineered";
 				PRODUCT_NAME = "Units Eng.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -506,7 +508,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.camdencarlson.Units-Engineered";
 				PRODUCT_NAME = "Units Eng.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -629,7 +631,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios.git" */ = {
+		978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
 			requirement = {
@@ -642,7 +644,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		978267DA2929FE7C003E7959 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios.git" */;
+			package = 978267D92929FE7C003E7959 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
 		};
 /* End XCSwiftPackageProductDependency section */

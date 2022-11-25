@@ -12,6 +12,7 @@ struct CalcView: View {
     @State var viewModel: UnitsSession
     @FocusState private var keyboardFocused: Bool
     @Binding var customView: Bool
+    @Binding var purchaseView: Bool
     @Binding var unitStringValue: String
     @EnvironmentObject var userViewModel: UserViewModel
     
@@ -39,12 +40,7 @@ struct CalcView: View {
                 if userViewModel.isSubscriptionActive != true {
                     if userViewModel.package != nil {
                         Button(action: {
-                            Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
-                              if customerInfo?.entitlements["allaccess"]?.isActive == true {
-                                  userViewModel.isSubscriptionActive = true
-                              }
-                            }
-                            viewModel.allAccess = userViewModel.isSubscriptionActive
+                            purchaseView = !purchaseView
                         }, label: {
                             ZStack {
                                 Text("Go Pro")
@@ -211,8 +207,8 @@ struct TextView: View {
             Text(aContent)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 15)
-                .font(.system(size: 21))
+                .frame(height: 19)
+                .font(.system(size: 24))
                 .textSelection(.enabled)
         }
     }
@@ -225,8 +221,8 @@ struct ValueView: View {
             Text(out.valOfUnit)
                 .foregroundColor(Color(UIColor.systemBackground))
                 .colorInvert()
-                .frame(height: 15)
-                .font(.system(size: 19))
+                .frame(height: 19)
+                .font(.system(size: 22))
                 .textSelection(.enabled)
         }
     }

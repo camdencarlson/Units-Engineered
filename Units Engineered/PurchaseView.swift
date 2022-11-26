@@ -13,24 +13,60 @@ struct PurchaseView: View {
     @State var viewModel: UnitsSession
     @State private var showAlert = false
     @Binding var purchaseView: Bool
+    let images = ["1","2","3","6"]
     
     var body: some View {
-        Button(action: {
-            purchaseView = !purchaseView
-        }, label: {
-            Text("Back")
-        })
+        ZStack {
+            HStack {
+                Button(action: {
+                    purchaseView = !purchaseView
+                }, label: {
+                    Label("", systemImage: "arrow.backward")
+                })
+                .padding()
+                
+                Spacer()
+            }
+            .frame(alignment: .leading)
+            
+            HStack {
+                Text("Go Pro - All Access")
+                    .font(.title)
+                    .bold()
+            }
+            .frame(alignment: .center)
+        }
+        
+        TabView {
+            
+            ForEach(images, id: \.self) { item in
+                 //3
+                 Image(item)
+                    .resizable()
+                    .scaledToFill()
+                    
+                    
+            }
+        }
+        .cornerRadius(20)
+        .tabViewStyle(PageTabViewStyle())
         .padding()
+        
+        Text("Unlock all 200+ unit conversions, 20+ measurements, and access to all future features and custom functionality")
+            .font(.body)
+            .padding()
+            .multilineTextAlignment(.center)
         
         if userViewModel.isSubscriptionActive != true {
             if userViewModel.package != nil {
                 Button(action: {
                     showAlert = true
                 }, label: {
-                    Text("Go Pro")
-                        .foregroundColor(Color(UIColor.systemBackground))
+                    Text("Subscribe for $9.99/yr")
+                        .foregroundColor(.white)
+                        .bold()
                         .background(Rectangle()
-                            .frame(width: 100, height: 30)
+                            .frame(width: 200, height: 30)
                             .foregroundColor(.blue)
                             .cornerRadius(15))
                 })
@@ -52,28 +88,6 @@ struct PurchaseView: View {
                         )
                     )
                 }
-//                Button(action: {
-//                    Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
-//                      if customerInfo?.entitlements["allaccess"]?.isActive == true {
-//                          userViewModel.isSubscriptionActive = true
-//                      }
-//                    }
-//                    viewModel.allAccess = userViewModel.isSubscriptionActive
-//                }, label: {
-//                    ZStack {
-//                        Text("Go Pro")
-//                            .foregroundColor(Color(UIColor.systemBackground))
-//                            .background(Rectangle()
-//                                .frame(width: 100, height: 30)
-//                                .foregroundColor(.blue)
-//                                .cornerRadius(15))
-//
-//
-//                    }
-//                    .padding([.top, .trailing, .leading])
-//
-//
-//                })
             }
             
         }
@@ -87,15 +101,15 @@ struct PurchaseView: View {
         }, label: {
             ZStack {
                 Text("Restore Purchases")
-                    .foregroundColor(Color(UIColor.systemBackground))
-                    .background(Rectangle()
-                        .frame(width: 160, height: 30)
-                        .foregroundColor(.blue)
-                        .cornerRadius(15))
+//                    .foregroundColor(Color(UIColor.systemBackground))
+//                    .background(Rectangle()
+//                        .frame(width: 160, height: 30)
+//                        .foregroundColor(.blue)
+//                        .cornerRadius(15))
                 
                 
             }
-            .padding([.top, .trailing, .leading])
+            .padding()
         })
         
         Spacer()

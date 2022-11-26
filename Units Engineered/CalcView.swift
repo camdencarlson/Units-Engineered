@@ -36,44 +36,56 @@ struct CalcView: View {
     
     var body: some View {
         VStack {
-            HStack(alignment: .center) {
-                if userViewModel.isSubscriptionActive != true {
-                    if userViewModel.package != nil {
-                        Button(action: {
-                            purchaseView = !purchaseView
-                        }, label: {
-                            ZStack {
+            ZStack() {
+                HStack {
+                    if userViewModel.isSubscriptionActive != true {
+                        if userViewModel.package != nil {
+                            Button(action: {
+                                purchaseView = !purchaseView
+                            }, label: {
+                             
                                 Text("Go Pro")
-                                    .foregroundColor(Color(UIColor.systemBackground))
+                                    .bold()
+                                    .foregroundColor(.white)
                                     .background(Rectangle()
-                                        .frame(width: 100, height: 30)
+                                        .frame(width: 70, height: 30)
                                         .foregroundColor(.blue)
                                         .cornerRadius(15))
+                                    .frame(alignment: .leading)
+                                    .padding([.top, .leading])
+                                    
                                 
-                                
-                            }
-                            .padding([.top, .trailing, .leading])
+                            })
                             
                             
-                        })
+                        }
+                       
                     }
                     
+                    Spacer()
                 }
-                Button(action: {
-                    customView = !customView
-                }, label: {
-                    ZStack {
-                        Text("Custom Units")
-                            .foregroundColor(Color(UIColor.systemBackground))
-                            .background(Rectangle()
-                                .frame(width: 120, height: 30)
-                                .foregroundColor(.blue)
-                                .cornerRadius(15))
-                        
-                        
-                    }
-                    .padding([.top, .trailing, .leading])
-                })
+                .frame(alignment: .leading)
+                
+                HStack {
+                    Button(action: {
+                        customView = !customView
+                    }, label: {
+                        ZStack {
+                            Text("Custom Units")
+                                .bold()
+                                .foregroundColor(.white)
+                                .background(Rectangle()
+                                    .frame(width: 120, height: 30)
+                                    .foregroundColor(.blue)
+                                    .cornerRadius(15))
+                                
+                            
+                        }
+                        .padding([.top, .trailing, .leading])
+                    })
+                    .frame(alignment: .center)
+                }
+                
             }
             
             

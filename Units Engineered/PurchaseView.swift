@@ -13,7 +13,7 @@ struct PurchaseView: View {
     @State var viewModel: UnitsSession
     @State private var showAlert = false
     @Binding var purchaseView: Bool
-    let images = ["1","2","3","6"]
+    let images = ["3","2","1","6"]
     
     var body: some View {
         ZStack {

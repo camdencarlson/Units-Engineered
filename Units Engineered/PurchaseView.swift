@@ -62,7 +62,7 @@ struct PurchaseView: View {
                 Button(action: {
                     showAlert = true
                 }, label: {
-                    Text("Subscribe for $9.99/yr")
+                    Text("Try Free")
                         .foregroundColor(.white)
                         .bold()
                         .background(Rectangle()
@@ -73,9 +73,9 @@ struct PurchaseView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("All-Access Annual Subscription"),
-                        message: Text("Would you like to purchase the Annual All-Access subscription unlocking all 200+ unit conversions for $9.99/yr?"),
+                        message: Text("Would you like to try for free the Annual All-Access subscription unlocking all 200+ unit conversions for $9.99/yr?"),
                         primaryButton: .default(
-                            Text("Purchase"),
+                            Text("Try Free"),
                             action: {Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in
                                 if customerInfo?.entitlements["allaccess"]?.isActive == true {
                                     userViewModel.isSubscriptionActive = true

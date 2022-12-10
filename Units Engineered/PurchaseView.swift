@@ -73,7 +73,7 @@ struct PurchaseView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("All-Access Annual Subscription"),
-                        message: Text("Would you like to try for free the Annual All-Access subscription unlocking all 200+ unit conversions for $9.99/yr?"),
+                        message: Text("Would you like to try the Annual All-Access subscription unlocking all 200+ unit conversions?"),
                         primaryButton: .default(
                             Text("Try Free"),
                             action: {Purchases.shared.purchase(package: userViewModel.package!.availablePackages[0]) { (transaction, customerInfo, error, userCancelled) in

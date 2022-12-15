@@ -53,15 +53,10 @@ struct CalcView: View {
                                         .cornerRadius(15))
                                     .frame(alignment: .leading)
                                     .padding([.top, .leading])
-                                    
                                 
                             })
-                            
-                            
                         }
-                       
                     }
-                    
                     Spacer()
                 }
                 .frame(alignment: .leading)
@@ -134,14 +129,15 @@ struct CalcView: View {
                             } else {
                                 Text("Temperature").tag("Temperature")
                                 Text("Length").tag("Length")
+                                Text("Go Pro to Unlock All").tag("Unlock")
                             }
                             
                         }
-                            
 //                        } label: {
 //                            Text(viewModel.selection)
 //                        }
                         .fixedSize(horizontal: false, vertical: true)
+                        
                     }
                     
                     .font(.title2)
@@ -210,6 +206,7 @@ struct CalcView: View {
         } // End of entire VStack
         
     } // End of body
+    
 }
 
 struct TextView: View {
@@ -239,4 +236,5 @@ struct ValueView: View {
         }
     }
 }
+
 

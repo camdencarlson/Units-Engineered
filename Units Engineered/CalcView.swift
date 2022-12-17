@@ -210,15 +210,19 @@ struct CalcView: View {
 }
 
 struct TextView: View {
+    @State var color = [Color(UIColor.systemBackground), Color.gray];
+    @Binding var colorBool: Bool
+    @Binding var colorInt: Int
     var content: [String]
     var body: some View {
         ForEach(content[0..<content.count], id: \.self) { aContent in
             Text(aContent)
-                .foregroundColor(Color(UIColor.systemBackground))
+                .foregroundColor(color[colorInt])
                 .colorInvert()
                 .frame(height: 19)
                 .font(.system(size: 24))
                 .textSelection(.enabled)
+            
         }
     }
 }
